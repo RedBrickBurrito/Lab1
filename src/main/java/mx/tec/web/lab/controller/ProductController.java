@@ -61,18 +61,21 @@ public class ProductController {
 	
 	@PutMapping("/products/{id}")
 	public ResponseEntity<Product> modifyProduct(@PathVariable(value = "id") String id, @RequestBody Product newProduct) { 
-		ResponseEntity<Product> responseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
+		ResponseEntity<Product> responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT); 
 		Optional<Product> product = productManager.modifyProduct(id, newProduct); 
 		if (product.isPresent()) { 
-			responseEntity = new ResponseEntity<>(product.get(), HttpStatus.CREATED); 
+			responseEntity = new ResponseEntity<>(product.get(), HttpStatus.OK); 
 		} 
 		return responseEntity; 
 	}
 	
 	@DeleteMapping("/products/{id}")
 	public ResponseEntity<Product> deleteProduct(@PathVariable(value = "id") String id) { 
+		ResponseEntity<Product> responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT); 
 		Optional<Product> product = productManager.deleteProduct(id);
-		ResponseEntity<Product> responseEntity = new ResponseEntity<>(HttpStatus.OK); 
+		if (product.isPresent()) { 
+			responseEntity = new ResponseEntity<>(HttpStatus.OK); 
+		} 
 		return responseEntity; 
 	} 
 	
