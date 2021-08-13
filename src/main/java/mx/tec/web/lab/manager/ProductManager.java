@@ -69,13 +69,10 @@ public class ProductManager {
 				product.setMediumImageUrl(newProduct.getMediumImageUrl());
 				product.setSmallImageUrl(newProduct.getSmallImageUrl());
 				product.setName(newProduct.getName());
-
+				modifiedProduct = Optional.of(product);
 				break; 
 			}
 		}
-		
-		modifiedProduct = Optional.of(newProduct);
-		
 		
 		return modifiedProduct; 
 	} 
